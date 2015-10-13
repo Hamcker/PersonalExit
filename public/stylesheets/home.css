@@ -1,0 +1,24 @@
+.container
+{
+	position: relative;
+	width: 100%;
+}
+
+div.header {
+	position: absolute;
+	left: 0;
+	height: auto;
+	display: block;
+    width: 100%;
+	background-color: darkred;
+	direction: rtl;
+}
+
+div.image {
+	height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    /*position: relative;*/
+    background-color: lightcoral;
+	/*display: inline-block;*/
+}

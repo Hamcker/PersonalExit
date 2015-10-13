@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	link(rel='stylesheet', href='/stylesheets/login.css')
+	script(src='/particles.js/particles.min.js')
+	div#particles-js(Style="background-color: #b61924; position: absolute; top: 0; bottom: 0; right:0; left: 0;")
+	span.title خروج موقت شخصی
+	div.centerized
+		form#loginForm.form-horizontal
+			div.form-group
+				div.input-group
+					input.form-control(type="text", id="username", name="username", placeholder="نام کاربری...")
+					span.input-group-addon
+						span.glyphicon.glyphicon-user
+			div.form-group
+				div.input-group
+					input.form-control(type="text", id="password", name="password", placeholder="کلمه عبور...")
+					span.input-group-addon
+						span.glyphicon.glyphicon-asterisk
+			div.form-group
+				button.btn.btn-default(type='button', onclick="login()")
+					|ورود
+		span(style="direction: rtl; color: red;") #{loginMessage}
+	script(src='/scripts/login.js')
+	

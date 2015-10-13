@@ -1,0 +1,26 @@
+.centerized {
+	max-width: 350px;
+	position: relative;
+    margin: 0 auto;
+    margin-top: 30px;
+	padding: 50px;
+}
+
+.input-group input {
+	direction: rtl;
+}
+
+button {
+	min-width: 80px;
+    width: 100%;
+}
+
+span.title {
+	position: relative;
+    text-align: center;
+    display: block;
+    color: white;
+    font-size: 4em;
+    font-weight: 100;
+    margin-top: 200px;
+}
