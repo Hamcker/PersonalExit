@@ -1,3 +1,4 @@
 # PersonalExit
-Personal Exit for Shoniz
-this is my first Node.js app
+`Personal Exit for Shoniz`
+
+Alright this is my first Node.js app. 
