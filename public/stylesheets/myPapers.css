@@ -1,0 +1,36 @@
+div#subpageContainer{
+	height: 100%;
+	background-color: #FFDFDF;
+	position: absolute;
+	top:0;
+	right:0;
+	bottom: 0;
+	left: 0;
+}
+
+.wrapper{
+	padding: 30px;
+	direction: rtl;
+}
+
+button.btn.btn-primary{
+	margin-right: 5px;
+}
+
+.modal-header .close {
+	float: left;
+}
+
+.modal-body input,
+.modal-body select{
+	color: blue;
+    position: absolute;
+    font-weight: 500;
+	/*border: none;*/
+    background-color: transparent;
+}
+
+input#Unit {
+    top: 110px;
+    right: 78px;
+}

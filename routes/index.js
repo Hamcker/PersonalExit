@@ -20,8 +20,12 @@ router.get('/home', function (req, res, next) {
   res.render('home');
 });
 
-router.post('/', function (req, res, next) {
-  res.send('hiiii');
-})
+router.get('/myPapers', function (req, res, next) {
+  res.render('myPapers');
+});
+
+router.get('/papersToSign', function (req, res, next) {
+  res.render('myPapers');
+});
 
 module.exports = router;

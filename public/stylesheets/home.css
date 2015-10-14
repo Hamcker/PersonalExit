@@ -1,24 +1,57 @@
-.container
+.container1
 {
 	position: relative;
 	width: 100%;
 }
 
 div.header {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	height: auto;
 	display: block;
     width: 100%;
 	background-color: darkred;
 	direction: rtl;
+	z-index: 1;
 }
 
 div.image {
 	height: 60px;
     width: 60px;
     border-radius: 30px;
-    /*position: relative;*/
     background-color: lightcoral;
-	/*display: inline-block;*/
+	display: inline-block;
+	vertical-align: middle;
+}
+
+span.user {
+	display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-size: 2em;
+    font-weight: 100;
+    margin-right: 14px;
+}
+
+span.menu {
+	display: inline-block;
+    vertical-align: middle;
+    color: white;
+	opacity: 0.8;
+    font-size: 2em;
+    font-weight: 100;
+    margin-right: 50px;
+	padding: 6px;
+}
+
+.current {
+	border-bottom: 2px solid white
+}
+
+div#subpage {
+	position: absolute;
+	top: 100px;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }

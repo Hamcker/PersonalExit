@@ -3,11 +3,18 @@ extends layout
 
 block content
 	link(rel="stylesheet",href="/stylesheets/home.css")
-	script(src="/scripts/home.js")
-	div.container
+	script(src='/particles.js/particles.min.js')
+
+	div
 		div.header
-			div.row.middle-xs(style="margin: 30px;")
-				div.col-md-1
-					div.image.box
-				div.col-md-1
-					span.box حامد ذاکری میاب	
+			div#particles-js(Style="position: absolute; top: 0; bottom: 0; right:0; left: 0;opacity: 0.5;")
+			div(style="margin: 20px;")
+				div.image
+				span.user حامد ذاکری میاب
+				a(href="#",data-page="0")
+					span.menu برگه های من
+				a(href="#",data-page="1")
+					span.menu کارتابل
+		div
+			div#subpage
+	script(src="/scripts/home.js")

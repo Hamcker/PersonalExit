@@ -1,0 +1,26 @@
+link(rel="stylesheet",href="stylesheets/myPapers.css")
+
+div#subpageContainer
+	div.wrapper
+		div
+			button(data-toggle="modal",data-target="#regModal")
+				|ثبت برگه جدید
+			div#regModal.modal.fade(role="dialog")
+				div.modal-dialog(role="document",style="width:770px;")
+					div.modal-content
+						div.modal-header
+							button.close(type="button",data-dismiss="modal",aria-label="Close")
+								span(aria-hidden="true") 
+									|&times;
+							h4.modal-title#myModalLabel ثبت برگ خروج موقت شخصی
+						div.modal-body
+							img(src="/images/Paper.png",style="width:750px; opacity:0.3;")
+							select#Unit(name="Unit")
+								option(value="سعید آباد")
+									|سعید آباد
+							select#Unit(name="Day")
+							input#Unit(name="Month")
+							input#Unit(name="Unit")
+						div.modal-footer
+							button.btn.btn-default(type="button",data-dismiss="modal") انصراف
+							button.btn.btn-primary(type="button") ثبت

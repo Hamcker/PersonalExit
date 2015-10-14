@@ -16,7 +16,6 @@ var sql = require('mssql')
 var flash = require('connect-flash');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var logins = require('./routes/login');
 
 var app = express();
@@ -51,7 +50,6 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/login', logins(passport))
 
 
