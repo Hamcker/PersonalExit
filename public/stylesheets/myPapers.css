@@ -78,3 +78,7 @@ select#unit {
     right: 600px;
     width: 136px;
 }
+
+.hidden {
+	display: none;
+}

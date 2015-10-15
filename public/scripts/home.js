@@ -1,11 +1,12 @@
 var funcs = [
 	function () {
-		$.get('/myPapers',function(d,s,x){
+		$.get('/home/myPapers', function (d, s, x) {
 			$('#subpage').html(d);
+			//window.history.pushState(d, 'myPapers', 'home/myPapers');
 		});
 	},
 	function () {
-		$.get('/papersToSign',function(d,s,x){
+		$.get('/home/papersToSign', function (d, s, x) {
 			$('#subpage').html(d);
 		});
 	}

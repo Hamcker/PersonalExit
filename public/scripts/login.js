@@ -2,6 +2,7 @@ function login(){
 	console.log($('#loginForm').serializeArray());
 	$.post('login', $('#loginForm').serializeArray(), function(d,s,x) {
 		$('#page').html(d);
+		window.history.pushState(d,'home','home');
 	})
 }
 

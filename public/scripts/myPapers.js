@@ -16,3 +16,7 @@ $('#personalCode').focusout(function (ev) {
 		})
 	});
 });
+
+$(document).ready(function(){
+	
+});

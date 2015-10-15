@@ -2,36 +2,41 @@ link(rel="stylesheet",href="stylesheets/myPapers.css")
 link(rel="stylesheet",href="stylesheets/PersianCalendar.css")
 link(rel="stylesheet",href="font-awesome/css/font-awesome.min.css")
 div#subpageContainer(ng-app="myPapersApp")
-	div.wrapper
+	.wrapper
 		div
 			button(data-toggle="modal",data-target="#regModal")
 				|ثبت برگه جدید
-			div#regModal(role="dialog",ng-controller="newPaperCtrl")
-				div.modal-dialog(role="document",style="width:770px;")
-					div.modal-content
-						div.modal-header
+			#regModal(role="dialog",ng-controller="newPaperCtrl")
+				.modal-dialog(role="document",style="width:770px;")
+					.modal-content
+						.modal-header
 							button.close(type="button",data-dismiss="modal",aria-label="Close")
 								span(aria-hidden="true") 
 									|&times;
 							h4.modal-title#myModalLabel ثبت برگ خروج موقت شخصی
-						div.modal-body
+						.modal-body
 							img(src="/images/Paper.jpg",style="width:750px; opacity:0.3;")
 							select#unit(name="Unit")
 								option(value="سعید آباد")
 									|سعید آباد
-							div#date
+							#date
 								input(name="Date",data-prg-date="datePicker",value="1394/07/22",type="text")
 								span.fa.fa-calendar(data-prg-date="datePicker")
 							// input#serial
 							span#fullname
-								|{{data.Name}}
-							input#personalCode(name="PersonalCode")
+								|#{employee.Name}
+							span#personalCode
+								|#{user.UserId}
 							span#partName
-								|{{data.partName}}
+								|#{employee.partName}
 							span#partId
-								|{{data.PartId}}
+								|#{employee.PartId}
 							input#fromDate
 							input#toDate
+							input.hidden(name="Name",value="#{employee.Name}")
+							input.hidden(name="UserId",value="#{user.UserId}")
+							input.hidden(name="partName",value="#{employee.partName}")
+							input.hidden(name="PartId",value="#{employee.PartId}")
 							// input#actFromDate
 							// input#actToDate
 							// span#duration
