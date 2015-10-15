@@ -1,0 +1,64 @@
+﻿/*************************************** Persian Calendar ******************************************************/
+#DatePickerContainer {
+    border: solid 2px #bb9292;
+    background-color: #F3F3F3;
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.176);
+    padding: 5px;
+}
+
+#DatePickerContainer table {
+    margin: 0 5px;
+}
+
+    #DatePickerContainer table th,
+    #DatePickerContainer table td {
+        padding: 1px;
+    }
+
+#DatePickerContainerTable {
+    border-collapse: initial !important;
+    border-spacing: 2px !important;
+}
+
+.DatePickerContainertd {
+    width: 25px;
+    height: 25px;
+    background-color: #fafafa;
+    border: 1px solid #ededed;
+    color: #767676;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+    .DatePickerContainertd:hover {
+        background-color: #cacaca;
+        color: #fff;
+    }
+
+.DatePickerContainerth {
+    width: 30px;
+    height: 20px;
+}
+
+.SelcetDayBtn {
+    background-color: #2ec1cc;
+    border-color: #29adb7;
+    color: white;
+}
+
+.datePickerload {
+    left: 0;
+    top: 30px;
+    min-width: 250px;
+    position: absolute;
+}
+/*******************************/
+

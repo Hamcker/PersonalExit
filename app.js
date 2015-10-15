@@ -49,10 +49,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 
-app.use('/', routes);
-app.use('/login', logins(passport))
-
-
 var sqlconfig = {
   user: 'Nodejs',
   password: 'Nodejs',
@@ -62,9 +58,13 @@ var sqlconfig = {
 
 app.use(function (req, res, next) {
   req.db = db
+  req.sqlconfig = sqlconfig;
   next();
 });
 
+
+app.use('/', routes);
+app.use('/login', logins(passport))
 
 
 passport.serializeUser(function (user, done) {

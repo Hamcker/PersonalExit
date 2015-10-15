@@ -21,16 +21,60 @@ button.btn.btn-primary{
 	float: left;
 }
 
-.modal-body input,
-.modal-body select{
+.modal-body>input,
+.modal-body >select,
+.modal-body>span{
 	color: blue;
     position: absolute;
     font-weight: 500;
 	/*border: none;*/
-    background-color: transparent;
+    /*background-color: transparent;*/
 }
 
-input#Unit {
-    top: 110px;
-    right: 78px;
+select#unit {
+    top: 106px;
+    right: 75px;
+    width: 184px;
+}
+
+#date{
+	top: 106px;
+    right: 361px;
+	width: 170px;
+	position: absolute;
+	color: blue;
+}
+
+#fullname {
+	top: 152px;
+    right: 108px;
+}
+
+#personalCode {
+	top: 152px;
+    right: 394px;
+    width: 127px;
+}
+
+#partName {
+	top: 152px;
+    right: 589px;
+}
+
+#partId{
+	top: 197px;
+    right: 111px;
+    width: 79px;
+}
+
+#fromDate{
+	top: 194px;
+    right: 383px;
+    width: 150px;
+}
+
+#toDate {
+    top: 194px;
+    right: 600px;
+    width: 136px;
 }

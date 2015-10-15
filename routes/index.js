@@ -1,4 +1,5 @@
 var express = require('express');
+var sql = require('mssql')
 var router = express.Router();
 
 /* GET home page. */
@@ -28,4 +29,13 @@ router.get('/papersToSign', function (req, res, next) {
   res.render('myPapers');
 });
 
+router.post('/getUserInfo', function (req, res, next) {
+  var sqlconnection = new sql.Connection(req.sqlconfig, function (err) {
+    var request = new sql.Request(sqlconnection);
+    request.input('ID', sql.NVarChar(50), req.body.personalCode)
+    request.execute('dbo.spTest',function(err,records){
+      res.send(records[0]);
+    })
+  });
+});
 module.exports = router;

@@ -16,9 +16,7 @@ $(function () {
 		event.preventDefault();
 		$('div a span').removeClass('current');
 		$(this).children('span').addClass('current');
-		console.log($(this).data('page'));
 		funcs[$(this).data('page')]();
-		
 	});
 });
 
