@@ -13,7 +13,7 @@ var funcs = [
 ]
 
 $(function () {
-	$("a").click(function (event) {
+	$("a[data-page]").click(function (event) {
 		event.preventDefault();
 		$('div a span').removeClass('current');
 		$(this).children('span').addClass('current');

@@ -2,7 +2,7 @@ var express = require('express');
 var sql = require('mssql')
 var router = express.Router();
 var expressSession = require('express-session');
-
+var mongoskin = require('mongoskin');
 
 
 /* GET home page. */
@@ -45,4 +45,33 @@ router.post('/home/getUserInfo', function (req, res, next) {
     })
   });
 });
+
+router.post('/home/register', function (req, res) {
+  // do business:
+  req.body.status = 0;
+  req.body.statusText = "در حال بررسی"
+  
+  // put in mongo
+  req.db.bind('Papers');
+  req.db.Papers.insert(req.body, function (err, result) {
+    if (err) res.send('f');
+    res.send('s');
+  });
+});
+
+router.get('/home/getPapers', function (req, res) {
+  var UserId = req.user.UserId.toString();
+  req.db.bind('Papers');
+  req.db.Papers.find({UserId: UserId}).toArray(function(err,items) {
+    res.send(items);
+  });
+});
+
+router.post('/home/delete',function(req,res){
+  var paperId = req.body.paperid.toString();
+  req.db.bind('Papers');
+  req.db.Papers.removeById(mongoskin.helper.toObjectID(paperId));
+  res.send(200,'ok');
+});
+
 module.exports = router;

@@ -9,8 +9,13 @@ module.exports = function (passport) {
   router.post('/', passport.authenticate('login', {
     successRedirect: '/home',
     failureRedirect: '/login',
-    failureFlash : true
+    failureFlash: true
   }))
-  
+
+  router.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
   return router;
 }

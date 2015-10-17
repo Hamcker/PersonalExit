@@ -33,6 +33,10 @@ span.user {
     margin-right: 14px;
 }
 
+a[logout]{
+	float: left;
+}
+
 span.menu {
 	display: inline-block;
     vertical-align: middle;

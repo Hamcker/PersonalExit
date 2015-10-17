@@ -1,9 +1,19 @@
 .centerized {
-	max-width: 350px;
-	position: relative;
+	max-width: 550px;
+    position: relative;
     margin: 0 auto;
-    margin-top: 30px;
-	padding: 50px;
+    margin-top: 13em;
+    padding: 50px;
+    background-color: rgba(182,25,36,0.5);
+    border-radius: 12px;
+    box-shadow: 0 5px 19px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+form#loginForm.form-horizontal{
+    max-width: 290px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 .input-group input {
@@ -22,5 +32,16 @@ span.title {
     color: white;
     font-size: 4em;
     font-weight: 100;
-    margin-top: 200px;
+    /*margin-top: 200px;*/
+}
+
+.error {
+    direction: rtl;
+    color: yellow;
+    /* text-align: right; */
+    float: right;
+}
+
+div#particles-js *{
+    opacity: 0.6;
 }

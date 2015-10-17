@@ -4,8 +4,9 @@ block content
 	link(rel='stylesheet', href='/stylesheets/login.css')
 	script(src='/particles.js/particles.min.js')
 	div#particles-js(Style="background-color: #b61924; position: absolute; top: 0; bottom: 0; right:0; left: 0;")
-	span.title خروج موقت شخصی
+	
 	div.centerized
+		span.title خروج موقت شخصی
 		form#loginForm.form-horizontal
 			div.form-group
 				div.input-group
@@ -20,6 +21,6 @@ block content
 			div.form-group
 				button.btn.btn-default(type='button', onclick="login()")
 					|ورود
-		span(style="direction: rtl; color: red;") #{loginMessage}
+		span.error #{loginMessage}
 	script(src='/scripts/login.js')
 	

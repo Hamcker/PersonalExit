@@ -21,9 +21,9 @@ button.btn.btn-primary{
 	float: left;
 }
 
-.modal-body>input,
-.modal-body >select,
-.modal-body>span{
+form>input,
+form>select,
+form>span{
 	color: blue;
     position: absolute;
     font-weight: 500;
@@ -81,4 +81,121 @@ select#unit {
 
 .hidden {
 	display: none;
+}
+
+.notificationsHost {
+	position: fixed;
+	right: 20px;
+	bottom: 0;
+}
+
+#btnReg{
+	min-width: 120px;
+}
+
+.papersHost{
+	margin: 50px 10px;
+	position: relative;
+}
+
+.paper {
+	border-bottom: 1px solid lightgray;
+	display: block;
+	position: relative;
+	padding: 10px 0;
+	background-color: rgba(0,0,0,0.01);
+	cursor: default;
+}
+.paper:hover {
+	background-color: rgba(100,0,0,0.1);
+}
+.paper:active {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cc0003+0,a00002+100 */
+	background: #cc0003; /* Old browsers */
+	background: -moz-linear-gradient(top,  #cc0003 0%, #a00002 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cc0003), color-stop(100%,#a00002)); /*Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #cc0003 0%,#a00002 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #cc0003 0%,#a00002 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #cc0003 0%,#a00002 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #cc0003 0%,#a00002 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0003', endColorstr='#a00002',GradientType=0 );/* IE6-9 */
+	color: white;
+}
+
+.papersheader {
+	border-bottom: 2px solid lightgray;
+	font-weight: 400;
+	font-size: 1.2em;
+	padding: 10px 0;
+	color: gray;
+}
+
+.col {
+	display: inline-block;
+}
+
+.col.center{
+	text-align: center;
+}
+.col.left{
+	text-align: left;
+	padding-left: 10px;
+}
+.col.right{
+	text-align: right;
+	padding-right: 10px;
+}
+
+.col1 {
+	width: 50px
+}
+.col2 {
+	width: 150px
+}
+.col3 {
+	width: 200px
+}
+.col4 {
+	width: 200px
+}
+.col5 {
+	width: 200px
+}
+
+.col5 * {
+	margin: 0 5px;
+	visibility: hidden;
+	float: right;
+}
+
+.paper:hover .col5 * {
+	visibility: visible;
+}
+
+
+.status {
+	width: 3px;
+	height: 80%;
+	position: absolute;
+	right: 0;
+	margin-top: -6px;
+}
+
+.status.s0 {
+	background-color: dodgerblue;
+}
+.status.s1 {
+	background-color: green;
+}
+.status.s2 {
+	background-color: greenyellow;
+}
+.status.s3 {
+	background-color: black;
+}
+.status.s4 {
+	background-color: white;
+}
+.status.s5 {
+	background-color: red;
 }

@@ -10,7 +10,6 @@ var passport = require('passport');
 var HttpStrategy = require('passport-http');
 var LocalStrategy = require('passport-local');
 var expressSession = require('express-session');
-var mongodb = require('mongodb');
 var md5 = require('md5');
 var sql = require('mssql')
 var flash = require('connect-flash');
