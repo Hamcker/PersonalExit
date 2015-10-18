@@ -44,17 +44,26 @@ $(function () {
 });
 
 $(document).ready(function () {
-
-	if (bootstrapInjector == null || true) {
-		console.warn('bootstraping');
-		console.log(bootstrapInjector);
-		var mapp = angular.module('peApp', []);
-		mapp.controller('newPaperCtrl', function ($scope) { });
-		mapp.controller('alertsCtrl', function ($scope) { $scope.alerts = [] });
-		mapp.controller('papersCtrl', function ($scope) { $scope.papers = [] });
-
-		// bootstrapInjector = angular.bootstrap(document, ['myPapersApp']);
-	}
+	// if (peAppModule == null) {
+	// 	console.warn('injector is null!!!');
+	// 	peAppModule = angular.module('peApp', []);
+	// 	peAppModule.controller('newPaperCtrl', function ($scope) { });
+	// 	peAppModule.controller('alertsCtrl', function ($scope) { $scope.alerts = [] });
+	// 	peAppModule.controller('papersCtrl', function ($scope) { $scope.papers = [] });
+	// 	angular.bootstrap(document, ['myPapersApp']);
+	// } else {
+		var injector = angular.injector(['ng']);
+		console.log(injector);
+		var $compile = injector.get('$compile');
+		console.log($compile);
+		$compile($("#subpageContainer").contents())({papers : []});
+		//peAppModule = angular.module('peApp',[]);
+		
+		peAppModule.controller('newPaperCtrl', function ($scope) { console.log($scope);});
+		peAppModule.controller('alertsCtrl', function ($scope) { $scope.alerts = [] });
+		peAppModule.controller('papersCtrl', function ($scope) {console.log($scope);  $scope.papers = [] });
+		
+	// }
 });
 
 
