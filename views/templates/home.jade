@@ -5,13 +5,12 @@ div
 		div#particles-js(Style="position: absolute; top: 0; bottom: 0; right:0; left: 0;opacity: 0.5;")
 		div(style="margin: 20px;")
 			div.image
-			span.user #{user.FullName}
-			a(href="#",data-page="0")
+			span.user #{FullName}
+			a(ui-sref=".myPapers")
 				span.menu برگه های من
-			a(href="#",data-page="1")
+			a(ui-sref=".papersToSign")
 				span.menu کارتابل
 			a(href="/login/logout",logout)
 				span.menu خروج
-	div
-		div#subpage #{content}
+	div(ui-view="subpage")
 script(src="/scripts/home.js")

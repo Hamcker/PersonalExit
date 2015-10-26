@@ -11,6 +11,8 @@ div#subpageContainer{
 .wrapper{
 	padding: 30px;
 	direction: rtl;
+	position: relative;
+    top: 100px;
 }
 
 button.btn.btn-primary{

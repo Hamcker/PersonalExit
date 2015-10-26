@@ -8,14 +8,16 @@ var stylus = require('stylus');
 var nib = require('nib');
 var passport = require('passport');
 var HttpStrategy = require('passport-http');
-var LocalStrategy = require('passport-local');
+var LocalStrategy = require('passport-local').Strategy;
 var expressSession = require('express-session');
 var md5 = require('md5');
 var sql = require('mssql')
 var flash = require('connect-flash');
 
 var routes = require('./routes/index');
-var logins = require('./routes/login');
+var templates = require('./routes/templates');
+var publicApisRoutes = require('./routes/publicApis');
+var authedApisRoutes = require('./routes/authedApis');
 
 var app = express();
 var db = require('mongoskin').db('mongodb://192.168.0.56/TestDB', { native_parser: true })
@@ -51,7 +53,7 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 var sqlconfig = {
   user: 'Nodejs',
   password: 'Nodejs',
-  server: 'frosh', 
+  server: 'frosh',
   database: 'UM',
 }
 
@@ -60,10 +62,6 @@ app.use(function (req, res, next) {
   req.sqlconfig = sqlconfig;
   next();
 });
-
-
-app.use('/', routes);
-app.use('/login', logins(passport))
 
 
 passport.serializeUser(function (user, done) {
@@ -80,7 +78,7 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use('login', new LocalStrategy({ passReqToCallback: true },
+passport.use('local', new LocalStrategy({ passReqToCallback: true },
   function (req, username, password, done) {
     var sqlconnection = new sql.Connection(sqlconfig, function (err) {
       var request = new sql.Request(sqlconnection);
@@ -89,19 +87,36 @@ passport.use('login', new LocalStrategy({ passReqToCallback: true },
         if (recordset.length == 1) {
           var userRec = recordset[0];
           var hashPass = md5(password);
-          if (userRec.PasswordText.toLowerCase() == hashPass.toLowerCase())
-            return done(null, recordset[0]);
+          if (userRec.PasswordText.toLowerCase() == hashPass.toLowerCase()) {
+            //success
+            var request2 = new sql.Request(sqlconnection);
+            request2.input('ID', sql.NVarChar(50), username)
+            request2.execute('dbo.spTest', function (err, records) {
+              req.session.user = recordset[0];
+              req.session.employee = records[0][0];
+              return done(null, recordset[0]);
+            })
+          }
           else
-            return done(null, false, req.flash('loginMessage','کلمه عبور صحیح نیست.'));
+            return done(null, false, req.flash('loginMessage', 'کلمه عبور صحیح نیست.'));
         }
         else
-          return done(err, false, req.flash('loginMessage','کد پرسنلی صحیح نیست یا در مرکز سعیدآباد مشغول نیست.'));
+          return done(err, false, req.flash('loginMessage', 'کد پرسنلی صحیح نیست یا در مرکز سعیدآباد مشغول نیست.'));
       });
     });
-
   }));
 
 //--------------------------------------------------------------------------------------------------------------
+
+
+app.use('/tmpl', templates);
+app.use('/papi', publicApisRoutes);
+app.use('/api', authedApisRoutes(passport));
+app.use('/*', routes(passport));
+
+passport.authenticate('local', function (req, res, next) {
+
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
