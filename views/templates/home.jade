@@ -1,16 +1,17 @@
-link(rel="stylesheet",href="/stylesheets/home.css")
-script(src='/particles.js/particles.min.js')
+link(rel="stylesheet",href="stylesheets/home.css")
+script(src='particles.js/particles.min.js')
 div
 	div.header
 		div#particles-js(Style="position: absolute; top: 0; bottom: 0; right:0; left: 0;opacity: 0.5;")
 		div(style="margin: 20px;")
 			div.image
-			span.user #{FullName}
+			a(ui-sref="home")
+				span.user #{FullName}
 			a(ui-sref=".myPapers")
 				span.menu برگه های من
 			a(ui-sref=".papersToSign")
 				span.menu کارتابل
-			a(href="/login/logout",logout)
+			a(href="/api/logout",logout,target="_self")
 				span.menu خروج
 	div(ui-view="subpage")
-script(src="/scripts/home.js")
+script(src="scripts/home.js")

@@ -112,7 +112,7 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true },
 app.use('/tmpl', templates);
 app.use('/papi', publicApisRoutes);
 app.use('/api', authedApisRoutes(passport));
-app.use('/*', routes(passport));
+app.all('/*', routes(passport));
 
 passport.authenticate('local', function (req, res, next) {
 

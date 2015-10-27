@@ -1,37 +1,38 @@
-link(rel="stylesheet",href="stylesheets/myPapers.css")
+link(rel="stylesheet",href="stylesheets/papersToSign.css")
 
 .wrapper(ng-controller="myPapersCtrl")
 	div
-		button.btn.btn-primary(data-toggle="modal",data-target="#regModal")
-			|ثبت برگه جدید
-		// button.btn(ng-click="refreshGrid()")
-		// 	|بروز رسانی
+		button.btn(ng-click="refreshGrid()")
+			|بروز رسانی
 		.papersHost
 			.papersheader
 				.col.col1.center
 					span ردیف
-				.col.col2.center
-					span تاریخ
+				.col.col2.right
+					span درخواست کننده
 				.col.col3.center
+					span تاریخ
+				.col.col4.center
 					span بازه زمانی
-				.col.col4.right
+				.col.col5.right
 					span وضعیت
 			.paper(ng-repeat="paper in papers")
-				//- ,class="{{ ? 'readonly':''}}"
 				.status(class="s{{paper.status}}")
 				.col.col1.center
 					span {{$index + 1}}
-				.col.col2.center
-					span {{paper.Date}}
+				.col.col2.right
+					span {{paper.Name}}
 				.col.col3.center
+					span {{paper.Date}}
+				.col.col4.center
 					span از {{paper.fromHour}} الی {{paper.toHour}}
-				.col.col4.right
+				.col.col5.right
 					span {{paper.statusText}}
-				.col.col5(ng-if="paper.status == 0")
-					a.edit(href="#",ng-click="edit(paper)")
-						span.fa.fa-pencil-square-o
-					a.delete(href="#",ng-click="delete(paper._id)")
-						span.fa.fa-trash-o
+				.col.col6
+					a.edit(href="#",ng-click="up(paper)")
+						span.fa.fa-chevron-up
+					a.delete(href="#",ng-click="down(paper)")
+						span.fa.fa-chevron-down
 		.notificationsHost
 			.alert.fade.in.alert-dismissible(ng-repeat="alert in alerts",role="alert",class="{{alert.helperClass}}")
 				button.close(type="button",data-dismiss="alert")

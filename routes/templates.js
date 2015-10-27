@@ -15,7 +15,7 @@ router.get('/home/myPapers', function (req, res) {
 });
 
 router.get('/home/papersToSign', function (req, res) {
-  res.render('templates/home/papersToSign');
+  res.render('templates/home/papersToSign', { user: req.session.user, employee: req.session.employee });
 });
 
 module.exports = router;

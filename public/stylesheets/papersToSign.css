@@ -112,7 +112,6 @@ select#unit {
 	background-color: rgba(100,0,0,0.1);
 }
 
-
 .papersheader {
 	border-bottom: 2px solid lightgray;
 	font-weight: 400;
@@ -153,13 +152,13 @@ select#unit {
 	width: 200px
 }
 
-.col5 * {
+.col6 * {
 	margin: 0 5px;
 	visibility: hidden;
 	float: right;
 }
 
-.paper:hover .col5 * {
+.paper:hover .col6 * {
 	visibility: visible;
 }
 
@@ -169,27 +168,42 @@ select#unit {
 	height: 80%;
 	position: absolute;
 	right: 0;
-	margin-top: -6px;
+	top: 0;
+	transition: all ease-out 0.8s;
 }
 
 .status.s0 {
 	background-color: dodgerblue;
+	height: 5.6px;
+	top: 17.2px;
 }
 .status.s1 {
 	background-color: lightgreen;
+	height: 11.2px;
+	top: 14.4px;
 }
 .status.s2 {
 	background-color: green;
+	height: 16.8px;
+	top: 11.6px;
 }
 .status.s3 {
 	background-color: darkgreen;
+	height: 22.4px;
+	top: 8.8px;
 }
 .status.s4 {
 	background-color: black;
+	height: 28px;
+	top: 6px;
 }
 .status.s5 {
 	background-color: blue;
+	height: 33.6px;
+	top: 3.2px;
 }
 .status.s6 {
 	background-color: red;
+	height: 40px;
+	top: 0px;
 }

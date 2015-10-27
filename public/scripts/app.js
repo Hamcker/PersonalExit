@@ -23,10 +23,6 @@ angular.module("peApp", ['ui.router'])
 			.state('home.myPapers', {
 				url: '/myPapers',
 				views: {
-					// "main@": {
-					// 	templateUrl: '/tmpl/home',
-					// 	controller: 'homeCtrl'
-					// },
 					"subpage": {
 						templateUrl: '/tmpl/home/myPapers',
 						controller: 'myPapersCtrl'
@@ -36,13 +32,9 @@ angular.module("peApp", ['ui.router'])
 			.state('home.papersToSign', {
 				url: '/papersToSign',
 				views: {
-					// "main@": {
-					// 	templateUrl: '/tmpl/home',
-					// 	controller: 'homeCtrl'
-					// },
 					"subpage": {
 						templateUrl: '/tmpl/home/papersToSign',
-						controller: 'papersToSignCtrl'
+						controller: 'myPapersCtrl'
 					}
 				}
 			});
@@ -60,7 +52,7 @@ angular.module("peApp", ['ui.router'])
 
 
 	.controller('loginCtrl', function ($scope, $state) {
-		$scope.test = 'شما'
+		$scope.test = ''
 		$scope.login = function () {
 			$.post('/api/login', $('#loginForm').serializeArray(), function (d, s, x) {
 				console.log('login result is: ' + d);
@@ -95,28 +87,29 @@ angular.module("peApp", ['ui.router'])
 		$scope.papers = [];
 		$scope.toHour = "",
 		$scope.fromHour = "",
-		$scope.Date = "1394/08/04"
+		$scope.Date = "1394-08-04"
+		$scope.editMode = false;
+		$scope._id = 0;
 
 		var refreshGrid = function () {
 			$http.get('api/getPapers').success(function (d) {
 				$scope.papers = d;
 			})
 		}
-
 		$scope.refreshGrid = refreshGrid;
-		
 		refreshGrid();
 
 		var clear = function () {
 			$scope.fromHour = "";
 			$scope.toHour = "";
 		}
+		$scope.clear = clear;
 
 		$scope.register = function () {
 			var data = {};
 			$('#newPaperForm').serializeArray().map(function (x) { data[x.name] = x.value });
 
-			$http.post('api/register', data).success(function (d) {
+			$http.post($scope.editMode ? 'api/edit' : 'api/register', data).success(function (d) {
 				if (d == 'f') {
 					$scope.alerts.push({
 						helperClass: "alert-error",
@@ -129,29 +122,94 @@ angular.module("peApp", ['ui.router'])
 						text: "درخواست خروج موقت شخصی ثبت شد. لطفاً منتظر بررسی مسئولین مربوط باشید."
 					})
 
-					clear();
+					$scope.clear();
 					refreshGrid();
 				}
 
 				$('#regModal').modal('hide');
 			});
+
+
 		}
 
 		$scope.edit = function (paper) {
 			$scope.fromHour = paper.fromHour;
 			$scope.toHour = paper.toHour;
 			$scope.Date = paper.Date;
+			$scope._id = paper._id;
 			$('#regModal').modal('show');
+			$scope.editMode = true;
 		}
 
-		$scope.delete = function (self) {
-			console.log(self);
-			var scope = angular.element($('.papersHost')).scope();
-			$http.post('api/delete', { paperid: self })
+		$scope.delete = function (_id) {
+			$http.post('api/delete', { paperid: _id })
 				.success(function () {
-					scope.refreshGrid();
+					$scope.refreshGrid();
 				});
 		}
+
+		$scope.up = function (paper) {
+			$http.post('api/up', { paperid: paper._id })
+				.success(function () {
+					switch (paper.status) {
+						case 0:
+							paper.statusText = 'مورد تأیید مسئول واحد'
+							break;
+						case 1:
+							paper.statusText = 'مورد تأیید کارگزینی'
+							break;
+						case 2:
+							paper.statusText = 'مورد تأیید نگهبانی'
+							break;
+						case 3:
+							paper.statusText = 'خارج شده'
+							break;
+						case 4:
+							paper.statusText = 'بازگشته'
+							break;
+						case 5:
+							paper.statusText = 'رد شده'
+							break;
+						case 6:
+							paper.statusText = 'در حال بررسی'
+							break;
+					}
+					paper.status = (paper.status + 1) % 7;
+				});
+		}
+		$scope.down = function (paper) {
+			$http.post('api/down', { paperid: paper._id })
+				.success(function () {
+					switch (paper.status) {
+						case 2:
+							paper.statusText = 'مورد تأیید مسئول واحد'
+							break;
+						case 3:
+							paper.statusText = 'مورد تأیید کارگزینی'
+							break;
+						case 4:
+							paper.statusText = 'مورد تأیید نگهبانی'
+							break;
+						case 5:
+							paper.statusText = 'خارج شده'
+							break;
+						case 6:
+							paper.statusText = 'بازگشته'
+							break;
+						case 0:
+							paper.statusText = 'رد شده'
+							break;
+						case 1:
+							paper.statusText = 'در حال بررسی'
+							break;
+					}
+					if (paper.status == 0)
+						paper.status = 6
+					else
+						paper.status--;
+				});
+		}
+
 	})
 
 

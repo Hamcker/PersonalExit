@@ -2,19 +2,29 @@ doctype html
 html(ng-app="peApp")
   head
     title= title
-    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='bootstrap/dist/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='stylesheets/style.css')
+    link(rel="stylesheet",href="font-awesome/css/font-awesome.min.css")
     
     base(href="/")
     
-    script(src="/jquery/dist/jquery.min.js")
-    script(src="/angular/angular.min.js")
-    script(src="/angular-ui-router/release/angular-ui-router.min.js")
-    script(src="/bootstrap/dist/js/bootstrap.min.js")
+    script(src="jquery/dist/jquery.min.js")
+    script(src="angular/angular.min.js")
+    script(src="angular-ui-router/release/angular-ui-router.min.js")
+    script(src="bootstrap/dist/js/bootstrap.min.js")
     
-    script(src="/scripts/app.js")
-    
+    script(src="scripts/app.js")
+    script(src="refscripts/jalali.js")
+    script(src="refscripts/calendar.js")
+    script(src="refscripts/calendar-setup.js")
+    script(src="refscripts/calendar-fa.js")
+    link(rel="stylesheet",href="/refscripts/theme.css")
+
+    script(src="/refscripts/jquery.plugin.min.js")
+    script(src="/refscripts/jquery.timeentry.min.js")
+    script(src="/refscripts/jquery.timeentry-fa.min.js")
+    link(rel="stylesheet",src="/refscripts/jquery.timeentry.css")
   body
     div(ui-view="main")
   

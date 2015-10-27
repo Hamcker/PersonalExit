@@ -14,14 +14,16 @@ module.exports = function (passport) {
 	}
 
 	// router.post('/login', function (req, res, next) {
-	// 	passport.authenticate('local', function (err,user,info) {
+	// 	passport.authenticate('local', function (err, user, info) {
 	// 		var i = arguments;
 	// 		if (err) next(err);
 	// 		if (!user) res.send("no user");
-	// 		passport.login(user, function (errx) {
-	// 			if (errx) res.send("no pass");
-	// 			res.send("ok");
-	// 		});
+	// 		else
+	// 			passport.login(user, function (errx) {
+	// 				if (errx) res.send("no pass");
+	// 				else
+	// 					res.send({ status: "ok", userFullname: user.FullName });
+	// 			});
 	// 	});
 	// });
 
@@ -39,18 +41,9 @@ module.exports = function (passport) {
 	// 	res.send("ok");
 	// });
 
-
-	router.post('/register', function (req, res) {
-		// do business:
-		req.body.status = 0;
-		req.body.statusText = "در حال بررسی"
-  
-		// put in mongo
-		req.db.bind('Papers');
-		req.db.Papers.insert(req.body, function (err, result) {
-			if (err) res.send('f');
-			res.send('s');
-		});
+	router.get('/logout', function (req, res) {
+		req.logout();
+		res.redirect('/');
 	});
 
 	router.get('/getPapers', function (req, res) {
@@ -61,6 +54,26 @@ module.exports = function (passport) {
 		});
 	});
 
+	router.post('/register', function (req, res) {
+		req.body.status = 0;
+		req.body.statusText = "در حال بررسی"
+		req.db.bind('Papers');
+		req.db.Papers.insert(req.body, function (err, result) {
+			if (err) res.send('f');
+			else res.send('s');
+		});
+	});
+
+	router.post('/edit', function (req, res) {
+		req.db.bind('Papers');
+		var paperId = req.body._id.toString();
+		delete req.body._id
+		req.db.Papers.updateById(paperId, { "$set": req.body }, function (err, result) {
+			if (err) res.send('f');
+			else res.send('s');
+		});
+	});
+
 	router.post('/delete', function (req, res) {
 		var paperId = req.body.paperid.toString();
 		console.log('deleting ' + paperId);
@@ -68,6 +81,83 @@ module.exports = function (passport) {
 		req.db.Papers.removeById(mongoskin.helper.toObjectID(paperId));
 		res.send(200, 'ok');
 	});
+
+	router.post('/up', function (req, res) {
+		var paperId = req.body.paperid.toString();
+		req.db.bind('Papers');
+		req.db.Papers.find({ "_id": mongoskin.helper.toObjectID(paperId) }).toArray(function (err, items) {
+			switch (items[0].status) {
+				case 0:
+					items[0].statusText = 'مورد تأیید مسئول واحد'
+					break;
+				case 1:
+					items[0].statusText = 'مورد تأیید کارگزینی'
+					break;
+				case 2:
+					items[0].statusText = 'مورد تأیید نگهبانی'
+					break;
+				case 3:
+					items[0].statusText = 'خارج شده'
+					break;
+				case 4:
+					items[0].statusText = 'بازگشته'
+					break;
+				case 5:
+					items[0].statusText = 'رد شده'
+					break;
+				case 6:
+					items[0].statusText = 'در حال بررسی'
+					break;
+			}
+			items[0].status = (items[0].status + 1) % 7;
+			delete items[0]._id
+
+			req.db.Papers.updateById(paperId, { "$set": items[0] }, function (err, result) {
+				if (err) res.send('f');
+				else res.send('s');
+			});
+		});
+	})
+
+	router.post('/down', function (req, res) {
+		var paperId = req.body.paperid.toString();
+		req.db.bind('Papers');
+		req.db.Papers.find({ "_id": mongoskin.helper.toObjectID(paperId) }).toArray(function (err, items) {
+			switch (items[0].status) {
+				case 2:
+					items[0].statusText = 'مورد تأیید مسئول واحد'
+					break;
+				case 3:
+					items[0].statusText = 'مورد تأیید کارگزینی'
+					break;
+				case 4:
+					items[0].statusText = 'مورد تأیید نگهبانی'
+					break;
+				case 5:
+					items[0].statusText = 'خارج شده'
+					break;
+				case 6:
+					items[0].statusText = 'بازگشته'
+					break;
+				case 0:
+					items[0].statusText = 'رد شده'
+					break;
+				case 1:
+					items[0].statusText = 'در حال بررسی'
+					break;
+			}
+			if (items[0].status == 0)
+				items[0].status = 6
+			else
+				items[0].status--;
+			delete items[0]._id
+
+			req.db.Papers.updateById(paperId, { "$set": items[0] }, function (err, result) {
+				if (err) res.send('f');
+				else res.send('s');
+			});
+		});
+	})
 
 	return router;
 }
